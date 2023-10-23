@@ -52,7 +52,20 @@ impl ConstraintSynthesizer<ConstraintF> for MerkleTreeVerification {
 
         let leaf_bytes = vec![leaf; 1];
 
-        // TODO<DONE> Check membership
+        // TODO <DONE> Check Membership
+        //     Check that hashing a Merkle tree path according to `self`, and
+        //     with `leaf` as the leaf, leads to a Merkle tree root equalling `root`.
+        //
+        // pub fn verify_membership(
+        //     &self,
+        //     leaf_hash_params: &LeafH::ParametersVar,
+        //     two_to_one_hash_params: &TwoToOneH::ParametersVar,
+        //     root: &TwoToOneH::OutputVar,
+        //     leaf: &impl ToBytesGadget<ConstraintF>,
+        // ) -> Result<Boolean<ConstraintF>, SynthesisError> {
+        //     let expected_root = self.calculate_root(leaf_hash_params, two_to_one_hash_params, leaf)?;
+        //     Ok(expected_root.is_eq(root)?)
+        // }
         let is_member = path.verify_membership(
             &leaf_crh_params,
             &two_to_one_crh_params,
